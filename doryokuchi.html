@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>努力値カウンター</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+
+    <style type="text/css">
+        table>thead>tr>th{
+            text-align: center;
+        }
+        .tr_type{
+            width:
+        }
+        button[data-add-value]{
+            width: 100%;
+            height: 65px;
+        }
+        input[data-total-value]{
+            width: 65px;
+        }
+        input[type="number"]{
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="tr_type">属性</th>
+                    <th class="tr_val">合計値</th>
+                    <th class="tr_btn">+</th>
+                    <th class="tr_btn">-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  row1  -->
+                <tr>
+                    <td>
+                        <select id="type_1" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_1" name="has_tool_1" data-has-tool>
+                                <label class="form-check-label" for="has_tool_1">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_1" name="has_poke_1" disabled>
+                                <label class="form-check-label" for="has_poke_1">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_1">合計</label>
+                            <input type="number" id="total_1" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+
+                </tr>
+                <!--  row2  -->
+                <tr>
+                    <td>
+                        <select id="type_2" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_2" name="has_tool_2" data-has-tool>
+                                <label class="form-check-label" for="has_tool_2">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_2" name="has_poke_2" disabled>
+                                <label class="form-check-label" for="has_poke_2">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_2">合計</label>
+                            <input type="number" id="total_2" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+                </tr>
+                <!--  row3  -->
+                <tr>
+                    <td>
+                        <select id="type_3" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_3" name="has_tool_3" data-has-tool>
+                                <label class="form-check-label" for="has_tool_3">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_3" name="has_poke_3" disabled>
+                                <label class="form-check-label" for="has_poke_3">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_3">合計</label>
+                            <input type="number" id="total_3" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+                </tr>
+
+                <!--  row4  -->
+                <tr>
+                    <td>
+                        <select id="type_4" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_4" name="has_tool_4" data-has-tool>
+                                <label class="form-check-label" for="has_tool_4">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_4" name="has_poke_4" disabled>
+                                <label class="form-check-label" for="has_poke_4">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_4">合計</label>
+                            <input type="number" id="total_4" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+
+                </tr>
+                <!--  row5  -->
+                <tr>
+                    <td>
+                        <select id="type_5" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_5" name="has_tool_5" data-has-tool>
+                                <label class="form-check-label" for="has_tool_5">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_5" name="has_poke_5" disabled>
+                                <label class="form-check-label" for="has_poke_5">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_5">合計</label>
+                            <input type="number" id="total_5" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+
+                </tr>
+                <!--  row6  -->
+                <tr>
+                    <td>
+                        <select id="type_6" name="type" class="form-control">
+                            <option value="h">HP</option>
+                            <option value="a">攻撃</option>
+                            <option value="b">防御</option>
+                            <option value="c">特攻</option>
+                            <option value="d">特防</option>
+                            <option value="s">素早さ</option>
+                        </select>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_tool_6" name="has_tool_6" data-has-tool>
+                                <label class="form-check-label" for="has_tool_6">
+                                    アイテム
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="パワー系アイテムの有無"></i>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="has_poke_6" name="has_poke_6" disabled>
+                                <label class="form-check-label" for="has_poke_6">
+                                    ポケルス
+                                </label>
+                                <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="ポケルスの有無(未実装)"></i>
+                            </div>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <label for="total_6">合計</label>
+                            <input type="number" id="total_6" class="form-control" disabled data-total-value value="0">
+                        </p>
+                        <p>
+                            <button class="btn btn-danger" data-value-reset>reset</button>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+1">+1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+2">+2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-info" data-add-value value="+3">+3</button>
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-1">-1</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-2">-2</button>
+                        </p>
+                        <p>
+                            <button class="btn btn-warning" data-add-value value="-3">-3</button>
+                        </p>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        
+        // ボタンクリック時
+        $('button[data-add-value]').on('click',function(){
+            var $this = $(this);
+            var val = $this.val();
+            var $tr = $this.parents('tr');
+            var $target = $tr.find('input[data-total-value]');
+            var has_tool = $tr.find('input[data-has-tool]').prop('checked');
+            var new_val = 0;
+
+            if( has_tool && val > 0){
+                val = Number(val) + 8;
+            }
+            if( has_tool && val < 0){
+                val = Number(val) - 8;
+            }
+
+            new_val = Number($target.val()) + Number(val);
+            new_val = new_val < 0 ? 0 : new_val; 
+            $target.val( new_val );
+        });
+
+        $('button[data-value-reset]').on('click',function(){
+            var $this = $(this);
+            var val = $this.val();
+            var $tr = $this.parents('tr');
+            var $target = $tr.find('input[data-total-value]');
+            $target.val(0);
+        });
+
+
+    });
+</script>
+</html>
